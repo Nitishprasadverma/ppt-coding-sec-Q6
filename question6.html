@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Custom Modal Window</title>
+  <style>
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      visibility: hidden;
+      opacity: 0;
+      transition: visibility 0s linear 0.25s, opacity 0.25s;
+    }
+
+    .modal {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+
+    .close-button {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+
+    .modal-content {
+      margin-bottom: 20px;
+    }
+
+    .modal.open {
+      visibility: visible;
+      opacity: 1;
+      transition: visibility 0s linear 0s, opacity 0.25s;
+    }
+
+    .no-scroll {
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+  <button id="openModalButton">Open Modal</button>
+
+  <div id="modalOverlay" class="overlay">
+    <div id="modalContent" class="modal">
+      <span id="closeButton" class="close-button">&times;</span>
+      <div class="modal-content">
+        <h2>Modal Content</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi at purus et enim iaculis efficitur.</p>
+      </div>
+      <button id="closeModalButton">Close Modal</button>
+    </div>
+  </div>
+
+  <script>
+    var openModalButton = document.getElementById("openModalButton");
+    var modalOverlay = document.getElementById("modalOverlay");
+    var closeModalButton = document.getElementById("closeModalButton");
+    var closeButton = document.getElementById("closeButton");
+
+    openModalButton.addEventListener("click", function() {
+      modalOverlay.classList.add("open");
+      document.body.classList.add("no-scroll");
+    });
+
+    closeModalButton.addEventListener("click", closeModal);
+    closeButton.addEventListener("click", closeModal);
+    modalOverlay.addEventListener("click", closeModal);
+
+    function closeModal() {
+      modalOverlay.classList.remove("open");
+      document.body.classList.remove("no-scroll");
+    }
+  </script>
+</body>
+</html>
